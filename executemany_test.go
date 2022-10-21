@@ -42,10 +42,6 @@ func TestParseQuery(t *testing.T) {
 }
 
 func TestExecuteMany(t *testing.T) {
-	db, mock, err := sqlmock.New()
-	if err != nil {
-		t.Fatal(err)
-	}
 	type exec struct {
 		query string
 		args  []interface{}
@@ -148,7 +144,13 @@ func TestExecuteMany(t *testing.T) {
 		},
 	}
 	for _, tt := range tests {
+		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
+			db, mock, err := sqlmock.New()
+			if err != nil {
+				t.Fatal(err)
+			}
 			mock.ExpectBegin()
 			tx, err := db.Begin()
 			if err != nil {
