@@ -1,0 +1,97 @@
+run:
+  issues-exit-code: 0
+
+linters:
+  enable-all: true
+  disable:
+    # 関数の複雑度をチェックする
+    - cyclop
+    # 戻り値を x, , , _, := f() のようにたくさん _ で受けているのを検出する
+    - dogsled
+    # コードクローンを検出する
+    - dupl
+    # 文字列リテラル中の重複を検出する
+    - dupword
+    # 変更を及ぼす可能性がある SQL の使用を tx.Query() の中で禁止する。作りこみが甘く誤警報が多い
+    - execinquery
+    # Deprecated. use exhaustruct
+    - exhaustivestruct
+    # struct の実体を作るときにすべてのフィールドが初期化されていることを求める
+    - exhaustruct
+    # 特定の識別子を禁止する。fmt.Printf の使用を禁止するようなルールがデフォルトで入っている
+    - forbidigo
+    # v2 := v.(Type) を禁止して v2, ok := v.(Type) によるチェックを強制する
+    - forcetypeassert
+    # 長い関数に警告を出す
+    - funlen
+    # import の順番のスタイルを強制する。特に可読性が上がるわけではない
+    - gci
+    # グローバル変数の宣言を禁止する
+    - gochecknoglobals
+    # func init() の利用を禁止する
+    - gochecknoinits
+    # 関数の複雑度をチェックする
+    - gocognit
+    # 何度も使われている定数は const で宣言することを求める
+    - goconst
+    # 関数の複雑度をチェックする
+    - gocyclo
+    # コメント行が . で終わることを求める
+    - godot
+    # コメント中の TODO や FIXME に警告を出す
+    - godox
+    # "do not define dynamic errors" の警告を出す。確かにそのほうがよいのだが、手軽さが失われる
+    - goerr113
+    # opnionated なスタイルチェッカー
+    - gofumpt
+    # Deprecated. use revive
+    - golint
+    # コード中のマジックナンバーに警告を出す
+    - gomnd
+    # Deprecated. too old
+    - interfacer
+    # 戻り値の型として interface ではなく具体的な型 (concrete type) を求める
+    - ireturn
+    # 長すぎる行に警告を出す
+    - lll
+    # 関数の複雑度をチェックする
+    - maintidx
+    # Deprecated. use fieldalignment
+    - maligned
+    # naked return の利用を禁止する
+    - nakedret
+    # if の中が複雑な時に警告を出す
+    - nestif
+    # return の前に空行を入れることを強制する
+    - nlreturn
+    # named return を禁止する
+    - nonamedreturns
+    # snake_case の利用を禁止する。必要になることもある
+    - nosnakecase
+    # t.Parallel() の使用を求める
+    - paralleltest
+    # make([]...) でスライスを作るときには pre-allocate することを求める
+    - prealloc
+    # Deprecated. use exportloopref
+    - scopelint
+    # struct のフィールドのタグをチェックする。JSON の命名規則などにも難癖を付けてくる
+    - tagliatelle
+    # テストコードが本体コードから分離された _test パッケージに配置することを強制する
+    - testpackage
+    # t.Helper() が使われるべき箇所で t.Helper() の利用を求める
+    - thelper
+    # t.Parallel() の使用を求める
+    - tparallel
+    # ある引数に同じ値しか渡されないとき警告を出す。抽象化の都合でそういう関数ができることもある
+    - unparam
+    # 変数名の長さをチェックする
+    - varnamelen
+    # FIXME: return err するときには wrap することを求める。有用だが、既存コードがほとんど対応できていない
+    - wrapcheck
+    # 空行の入れ方のスタイルを強制する
+    - wsl
+
+linters-settings:
+  errcheck:
+    exclude-functions:
+      - (*database/sql.Tx).Rollback
