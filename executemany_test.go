@@ -4,7 +4,6 @@ import (
 	"database/sql/driver"
 	"regexp"
 	"testing"
-	"time"
 
 	"github.com/DATA-DOG/go-sqlmock"
 	"github.com/google/go-cmp/cmp"
@@ -40,15 +39,6 @@ func TestParseQuery(t *testing.T) {
 			}
 		})
 	}
-}
-
-// https://pkg.go.dev/github.com/DATA-DOG/go-sqlmock#readme-matching-arguments-like-time-time
-type AnyTime struct{}
-
-// Match satisfies sqlmock.Argument interface
-func (a AnyTime) Match(v driver.Value) bool {
-	_, ok := v.(time.Time)
-	return ok
 }
 
 func TestExecuteMany(t *testing.T) {
@@ -179,5 +169,4 @@ func TestExecuteMany(t *testing.T) {
 			}
 		})
 	}
-
 }
