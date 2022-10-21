@@ -159,7 +159,8 @@ func TestExecuteMany(t *testing.T) {
 				for _, arg := range exc.args {
 					args = append(args, arg)
 				}
-				mock.ExpectExec(regexp.QuoteMeta(exc.query)).WithArgs(args...).WillReturnResult(sqlmock.NewResult(0, 0))
+				dummyResult := sqlmock.NewResult(0, 0)
+				mock.ExpectExec(regexp.QuoteMeta(exc.query)).WithArgs(args...).WillReturnResult(dummyResult)
 			}
 			if err := ExecuteMany(tx, tt.query, tt.args, tt.batchSize); err != nil {
 				t.Fatal(err)
